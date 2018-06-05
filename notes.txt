@@ -1,0 +1,8 @@
+pclass : 1/2/3
+sex : male/female
+age : 0-10/10-20/.../70-80
+sibsp : 0..8
+parch : 0..6
+Embarked : S,C,Q
+
+total : 9072
