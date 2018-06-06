@@ -1,3 +1,17 @@
+# | |                | |   | |  (_) |
+# | |_ ___  __ _  ___| |__ | | ___| |_
+# | __/ _ \/ _` |/ __| '_ \| |/ / | __|
+# | ||  __/ (_| | (__| | | |   <| | |_
+#  \__\___|\__,_|\___|_| |_|_|\_\_|\__|
+# @Author: Daniel Saadia <danielsaadia>
+# @Date:   2018-06-06T20:57:56+02:00
+# @Email:  daniel@les-sherpas.co
+# @Filename: titanic_train.py
+# @Last modified by:   danielsaadia
+# @Last modified time: 2018-06-06T21:10:48+02:00
+
+
+
 import numpy as np
 import pandas as pd
 import itertools as it
@@ -30,15 +44,17 @@ ages = [
 sibsps = [0,1,2,3,4,5,6,7,8]
 parchs = [0,1,2,3,4,5,6]
 embarked = ["C","S","Q"]
-for i in it.product(pclass, sex, ages, sibsps, parchs, embarked):
-    print(i)
-    print(i[2]["lower"])
 tdata = pd.read_csv("~/.kaggle/competitions/titanic/train.csv")
 tdata["FamilyName"] = tdata["Name"].str.split(",").str.get(0)
 tdata["Title"] = tdata["Name"].str.split(" ").str.get(1)
-# test = tdata[tdata[""]]
-test = tdata[(tdata["Age"] <= 20) & (tdata["Pclass"]==3) & (tdata["Sex"]=="male")]
-nb = test.count()
+for i in it.product(pclass, sex, ages, sibsps, parchs, embarked):
+    print(i)
+    print(i[2]["lower"])
+    filter = tdata[(tdata["Pclass"] == i[0]) & (tdata["Sex"] == i[1]) & \
+    (tdata["Age"] >= i[2]["lower"]) & (tdata["Age"] <= i[2]["higher"]) & (tdata["SibSp"] == i[3])\
+    & (tdata["Parch"] == i[4]) & (tdata["Embarked"] == i[5])]
+    nb = test.count()
+    print(nb)
 # print(test)
 # print(nb)
 # deads_classes = tdata[tdata["Survived"]==0]["Pclass"].value_counts()
